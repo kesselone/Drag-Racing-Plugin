@@ -106,9 +106,12 @@ namespace SpeedAndDistance
 
 
             InitializeComponent();
+            
+            R6.Text = Properties.Settings.Default.R_6Name;
+            R7.Text = Properties.Settings.Default.R_7Name;
+            R8.Text = Properties.Settings.Default.R_8Name;
 
-
-                        //Starts the driver
+            //Starts the driver
             RelayManager.Init();
             startButton.Enabled = true;
             R1.Enabled = false; R1.BackColor = SystemColors.Control;
@@ -479,6 +482,16 @@ namespace SpeedAndDistance
 
             buttonCancelRace.Visible = false;
 
+        }
+
+        private void renameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fom_rename fom_Rename = new fom_rename();
+            fom_Rename.ShowDialog(this);
+
+            R6.Text = Properties.Settings.Default.R_6Name;
+            R7.Text = Properties.Settings.Default.R_7Name;
+            R8.Text = Properties.Settings.Default.R_8Name;
         }
     }
 }

@@ -53,6 +53,8 @@
             this.radioButtonRaceMode1 = new System.Windows.Forms.RadioButton();
             this.radioButtonRaceMode2 = new System.Windows.Forms.RadioButton();
             this.R8 = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.R7 = new System.Windows.Forms.Button();
             this.R6 = new System.Windows.Forms.Button();
             this.R5 = new System.Windows.Forms.Button();
@@ -61,16 +63,17 @@
             this.R2 = new System.Windows.Forms.Button();
             this.RSerial = new System.Windows.Forms.Label();
             this.R1 = new System.Windows.Forms.Button();
-            this.startButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.timer500 = new System.Windows.Forms.Timer(this.components);
             this.timer2000 = new System.Windows.Forms.Timer(this.components);
             this.buttonCancelRace = new System.Windows.Forms.Button();
             this.timerRedraw = new System.Windows.Forms.Timer(this.components);
             this.labelRacetime = new System.Windows.Forms.Label();
+            this.startButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxBrakeCirc)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -340,6 +343,7 @@
             // R8
             // 
             this.R8.BackColor = System.Drawing.SystemColors.Control;
+            this.R8.ContextMenuStrip = this.contextMenuStrip1;
             this.R8.Location = new System.Drawing.Point(11, 203);
             this.R8.Margin = new System.Windows.Forms.Padding(2);
             this.R8.Name = "R8";
@@ -349,9 +353,24 @@
             this.R8.UseVisualStyleBackColor = false;
             this.R8.Click += new System.EventHandler(this.R8_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.renameToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 26);
+            // 
+            // renameToolStripMenuItem
+            // 
+            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.renameToolStripMenuItem.Text = "Rename";
+            this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
+            // 
             // R7
             // 
             this.R7.BackColor = System.Drawing.SystemColors.Control;
+            this.R7.ContextMenuStrip = this.contextMenuStrip1;
             this.R7.Location = new System.Drawing.Point(111, 165);
             this.R7.Margin = new System.Windows.Forms.Padding(2);
             this.R7.Name = "R7";
@@ -364,6 +383,7 @@
             // R6
             // 
             this.R6.BackColor = System.Drawing.SystemColors.Control;
+            this.R6.ContextMenuStrip = this.contextMenuStrip1;
             this.R6.Location = new System.Drawing.Point(11, 165);
             this.R6.Margin = new System.Windows.Forms.Padding(2);
             this.R6.Name = "R6";
@@ -376,10 +396,10 @@
             // R5
             // 
             this.R5.BackColor = System.Drawing.SystemColors.Control;
-            this.R5.Location = new System.Drawing.Point(306, 302);
+            this.R5.Location = new System.Drawing.Point(307, 297);
             this.R5.Margin = new System.Windows.Forms.Padding(2);
             this.R5.Name = "R5";
-            this.R5.Size = new System.Drawing.Size(57, 24);
+            this.R5.Size = new System.Drawing.Size(57, 23);
             this.R5.TabIndex = 28;
             this.R5.UseVisualStyleBackColor = false;
             this.R5.Click += new System.EventHandler(this.R5_Click);
@@ -387,10 +407,10 @@
             // R4
             // 
             this.R4.BackColor = System.Drawing.SystemColors.Control;
-            this.R4.Location = new System.Drawing.Point(306, 274);
+            this.R4.Location = new System.Drawing.Point(306, 270);
             this.R4.Margin = new System.Windows.Forms.Padding(2);
             this.R4.Name = "R4";
-            this.R4.Size = new System.Drawing.Size(57, 24);
+            this.R4.Size = new System.Drawing.Size(57, 23);
             this.R4.TabIndex = 27;
             this.R4.UseVisualStyleBackColor = false;
             this.R4.Click += new System.EventHandler(this.R4_Click);
@@ -398,10 +418,10 @@
             // R3
             // 
             this.R3.BackColor = System.Drawing.SystemColors.Control;
-            this.R3.Location = new System.Drawing.Point(306, 246);
+            this.R3.Location = new System.Drawing.Point(306, 243);
             this.R3.Margin = new System.Windows.Forms.Padding(2);
             this.R3.Name = "R3";
-            this.R3.Size = new System.Drawing.Size(57, 24);
+            this.R3.Size = new System.Drawing.Size(57, 23);
             this.R3.TabIndex = 26;
             this.R3.UseVisualStyleBackColor = false;
             this.R3.Click += new System.EventHandler(this.R3_Click);
@@ -412,7 +432,7 @@
             this.R2.Location = new System.Drawing.Point(306, 216);
             this.R2.Margin = new System.Windows.Forms.Padding(2);
             this.R2.Name = "R2";
-            this.R2.Size = new System.Drawing.Size(57, 24);
+            this.R2.Size = new System.Drawing.Size(57, 23);
             this.R2.TabIndex = 25;
             this.R2.UseVisualStyleBackColor = false;
             this.R2.Click += new System.EventHandler(this.R2_Click);
@@ -436,27 +456,6 @@
             this.R1.TabIndex = 24;
             this.R1.UseVisualStyleBackColor = false;
             this.R1.Click += new System.EventHandler(this.R1_Click);
-            // 
-            // startButton
-            // 
-            this.startButton.Image = ((System.Drawing.Image)(resources.GetObject("startButton.Image")));
-            this.startButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.startButton.Location = new System.Drawing.Point(113, 203);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(93, 34);
-            this.startButton.TabIndex = 34;
-            this.startButton.Text = "      Start";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BackgroundImage = global::SpeedAndDistance.Properties.Resources.e9d72b7fb88b68f92ccc721e0a3148b2;
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel1.Location = new System.Drawing.Point(212, 165);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(89, 185);
-            this.panel1.TabIndex = 33;
             // 
             // timer500
             // 
@@ -496,6 +495,27 @@
             this.labelRacetime.Text = "0.000";
             this.labelRacetime.Click += new System.EventHandler(this.labelRacetime_Click);
             // 
+            // startButton
+            // 
+            this.startButton.Image = ((System.Drawing.Image)(resources.GetObject("startButton.Image")));
+            this.startButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.startButton.Location = new System.Drawing.Point(113, 203);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(93, 34);
+            this.startButton.TabIndex = 34;
+            this.startButton.Text = "      Start";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = global::SpeedAndDistance.Properties.Resources.e9d72b7fb88b68f92ccc721e0a3148b2;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.Location = new System.Drawing.Point(212, 165);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(89, 185);
+            this.panel1.TabIndex = 33;
+            // 
             // SetDistancePerRev
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -526,6 +546,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -571,5 +592,7 @@
         private System.Windows.Forms.Button buttonCancelRace;
         private System.Windows.Forms.Timer timerRedraw;
         private System.Windows.Forms.Label labelRacetime;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
     }
 }

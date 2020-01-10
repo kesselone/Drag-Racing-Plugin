@@ -118,5 +118,41 @@ namespace SpeedAndDistance.Properties {
                 this["race_state"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Relay 6")]
+        public string R_6Name {
+            get {
+                return ((string)(this["R_6Name"]));
+            }
+            set {
+                this["R_6Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Relay 7")]
+        public string R_7Name {
+            get {
+                return ((string)(this["R_7Name"]));
+            }
+            set {
+                this["R_7Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Relay 8")]
+        public string R_8Name {
+            get {
+                return ((string)(this["R_8Name"]));
+            }
+            set {
+                this["R_8Name"] = value;
+            }
+        }
     }
 }
