@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DragRacing.Properties {
+namespace SpeedAndDistance.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -104,6 +104,18 @@ namespace DragRacing.Properties {
             }
             set {
                 this["race_mode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte race_state {
+            get {
+                return ((byte)(this["race_state"]));
+            }
+            set {
+                this["race_state"] = value;
             }
         }
     }

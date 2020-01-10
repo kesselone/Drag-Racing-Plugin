@@ -18,7 +18,7 @@ using System.Diagnostics;
 using PluginContracts;
 using DataConnection;
 
-namespace DragRacing
+namespace SpeedAndDistance
 {
     public partial class SetDistancePerRev : Form
     {
@@ -360,6 +360,14 @@ namespace DragRacing
         private void startButton_Click(object sender, EventArgs e)
         {
             SaveEverything();
+            Properties.Settings.Default.race_state = 0;
+            //Race State:
+            //0 - before start
+            //1 - starting
+            //2 - green, Go!
+            //3 - false start
+            //4 - Finished
+
             counter = 0;
             RelayManager.Open(0, 1);
             R1.BackColor = Color.Blue;
@@ -375,6 +383,7 @@ namespace DragRacing
             R6.BackColor = SystemColors.Control;
             RelayManager.Close(0, 7);
             R7.BackColor = SystemColors.Control;
+            buttonCancelRace.Visible = false;
 
             timer2000.Interval = Properties.Settings.Default.preStageTime_ms;
             if (Properties.Settings.Default.start_mode) { timer500.Interval = 500; } else { timer500.Interval = 400; }
@@ -393,7 +402,7 @@ namespace DragRacing
                     R2.BackColor = Color.Orange;
                     timer2000.Stop();
                     timer500.Start();
-
+            Properties.Settings.Default.race_state = 1;
         }
 
         private void timer500_Tick(object sender, EventArgs e)
@@ -431,7 +440,7 @@ namespace DragRacing
                     timer500.Stop();
                     buttonCancelRace.Visible = true;
                     stopwatch.Restart();
-
+                    Properties.Settings.Default.race_state = 2;
                     break;
             }
         }

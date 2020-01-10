@@ -10,7 +10,7 @@ using DataConnection;
 using Settings;
 
 
-namespace DragRacing
+namespace SpeedAndDistance
 {
 
     [Export(typeof(IDataIOProvider))]
@@ -146,6 +146,59 @@ namespace DragRacing
                 else
                     distance.y += rollerRPM / 60 * Properties.Settings.Default.brakeCirc * (float)e.processedDynoSample.timeStamp * (float) 3.28084;
             }
+
+            /////////////Drag Racing:
+            float distance_target = 0, speed_target = 0;
+            
+            
+            switch (Properties.Settings.Default.race_mode)
+            {
+                case 0:
+                    distance_target = 201.168F; //1/8th mile
+                    speed_target = 1000;
+                    break;
+                case 1:
+                    distance_target = 402.336F; //1/4th mile
+                    speed_target = 1000;
+                    break;
+                case 2:
+                    distance_target = 804.672F; //1/2 mile
+                    speed_target = 1000;
+                    break;
+                case 3:
+                    distance_target = 10000; //NA
+                    speed_target = 100; //0-100kmh
+                    break;
+                case 4:
+                    distance_target = 10000; //NA
+                    speed_target = 200; //0-100kmh
+                    break;
+            }
+            
+            
+            switch (Properties.Settings.Default.race_state)
+            {
+                case 0:
+                //come to stop
+                    break;
+                case 1:
+                if (rollerRPM > 0)
+                    {
+                        Properties.Settings.Default.race_state = 3; //false start 
+                    }
+                    break;
+                case 2:
+                    if (distance.y > distance_target || speed.y > speed_target)
+                    {
+                        Properties.Settings.Default.race_state = 4; //finished
+                    }
+                    break;
+
+            }
+           
+
+
+
         }
     }
 }

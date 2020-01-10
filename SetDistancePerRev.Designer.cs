@@ -1,4 +1,4 @@
-﻿namespace DragRacing
+﻿namespace SpeedAndDistance
 {
     partial class SetDistancePerRev
     {
@@ -305,12 +305,12 @@
             // 
             this.radioButtonRaceMode3.AutoSize = true;
             this.radioButtonRaceMode3.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButtonRaceMode3.Location = new System.Drawing.Point(42, 70);
+            this.radioButtonRaceMode3.Location = new System.Drawing.Point(31, 70);
             this.radioButtonRaceMode3.Name = "radioButtonRaceMode3";
-            this.radioButtonRaceMode3.Size = new System.Drawing.Size(53, 17);
+            this.radioButtonRaceMode3.Size = new System.Drawing.Size(64, 17);
             this.radioButtonRaceMode3.TabIndex = 20;
             this.radioButtonRaceMode3.TabStop = true;
-            this.radioButtonRaceMode3.Text = "1 Mile";
+            this.radioButtonRaceMode3.Text = "1/2 Mile";
             this.radioButtonRaceMode3.UseVisualStyleBackColor = true;
             // 
             // radioButtonRaceMode1
