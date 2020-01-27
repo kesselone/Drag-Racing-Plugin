@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 using System.IO;
 using USB;
 using System.Runtime.InteropServices;
@@ -18,6 +19,7 @@ using System.Diagnostics;
 using PluginContracts;
 using DataConnection;
 
+
 namespace SpeedAndDistance
 {
     public partial class SetDistancePerRev : Form
@@ -25,7 +27,9 @@ namespace SpeedAndDistance
         string dlldir; //Remembers the location of the installed driver
         private int counter;
         Stopwatch stopwatch = new Stopwatch();
-
+        HotKey HK = new HotKey();
+        
+        
 
         //Loads the driver from embeded resource
         static public class NativeMethods
@@ -103,6 +107,26 @@ namespace SpeedAndDistance
 
             //Makes a new event for when "YourDyno" closes.
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
+
+            ////////////////////////////////////
+            ///Start of app
+            ///
+            ////////////////////////////////////
+            //Hilfsform erschaffen um die Hotkeys zu behandeln. nicht sichtbar
+            Form HKHandlerForm = new Form() { Visible = false };            
+            HK.OwnerForm = HKHandlerForm;
+
+
+            HK.HotKeyPressed += new HotKey.HotKeyPressedEventHandler(HK_HotKeyPressed);
+
+            HK.AddHotKey(Keys.F1, HotKey.MODKEY.MOD_CONTROL, "Relay1Key");
+            HK.AddHotKey(Keys.F2, HotKey.MODKEY.MOD_CONTROL, "Relay2Key");
+            HK.AddHotKey(Keys.F3, HotKey.MODKEY.MOD_CONTROL, "Relay3Key");
+            HK.AddHotKey(Keys.F4, HotKey.MODKEY.MOD_CONTROL, "Relay4Key");
+            HK.AddHotKey(Keys.F5, HotKey.MODKEY.MOD_CONTROL, "Relay5Key");
+            HK.AddHotKey(Keys.F6, HotKey.MODKEY.MOD_NONE, "Relay6Key");
+            HK.AddHotKey(Keys.F7, HotKey.MODKEY.MOD_NONE, "Relay7Key");
+            HK.AddHotKey(Keys.F8, HotKey.MODKEY.MOD_NONE, "Relay8Key");
 
 
             InitializeComponent();
@@ -215,7 +239,14 @@ namespace SpeedAndDistance
 
         }
 
-
+        private void HK_HotKeyPressed(string ID)
+        {
+            if (ID == "Relay6Key") toggleRelay(6);
+            if (ID == "Relay7Key") toggleRelay(7);
+            if (ID == "Relay8Key") toggleRelay(8);
+            //DEBUG
+            //MessageBox.Show(ID);
+        }
 
         private void SetDistancePerRev_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -247,117 +278,41 @@ namespace SpeedAndDistance
 
         private void R1_Click(object sender, EventArgs e)
         {
-            if (R1.BackColor == SystemColors.Control)
-            {
-                //Enables that relay when button pressed.
-                RelayManager.Open(0, 1);
-                R1.BackColor = Color.ForestGreen;
-            }
-            else
-            {
-                //Disables that relay when button pressed.
-                RelayManager.Close(0, 1);
-                R1.BackColor = SystemColors.Control;
-            }
+            toggleRelay(1);
         }
-
         private void R2_Click(object sender, EventArgs e)
         {
-            //Same as above but for different buttons and so on.
-            if (R2.BackColor == SystemColors.Control)
-            {
-                RelayManager.Open(0, 2);
-                R2.BackColor = Color.ForestGreen;
-            }
-            else
-            {
-                RelayManager.Close(0, 2);
-                R2.BackColor = SystemColors.Control;
-            }
+            toggleRelay(2);
         }
 
         private void R3_Click(object sender, EventArgs e)
         {
-            if (R3.BackColor == SystemColors.Control)
-            {
-                RelayManager.Open(0, 3);
-                R3.BackColor = Color.ForestGreen;
-            }
-            else
-            {
-                RelayManager.Close(0, 3);
-                R3.BackColor = SystemColors.Control;
-            }
+            toggleRelay(3);
         }
 
         private void R4_Click(object sender, EventArgs e)
         {
-            if (R4.BackColor == SystemColors.Control)
-            {
-                RelayManager.Open(0, 4);
-                R4.BackColor = Color.ForestGreen;
-            }
-            else
-            {
-                RelayManager.Close(0, 4);
-                R4.BackColor = SystemColors.Control;
-            }
+            toggleRelay(4);
         }
 
         private void R5_Click(object sender, EventArgs e)
         {
-            if (R5.BackColor == SystemColors.Control)
-            {
-                RelayManager.Open(0, 5);
-                R5.BackColor = Color.ForestGreen;
-            }
-            else
-            {
-                RelayManager.Close(0, 5);
-                R5.BackColor = SystemColors.Control;
-            }
+            toggleRelay(5);
         }
 
         private void R6_Click(object sender, EventArgs e)
         {
-            if (R6.BackColor == SystemColors.Control)
-            {
-                RelayManager.Open(0, 6);
-                R6.BackColor = Color.ForestGreen;
-            }
-            else
-            {
-                RelayManager.Close(0, 6);
-                R6.BackColor = SystemColors.Control;
-            }
+            toggleRelay(6);
         }
 
         private void R7_Click(object sender, EventArgs e)
         {
-            if (R7.BackColor == SystemColors.Control)
-            {
-                RelayManager.Open(0, 7);
-                R7.BackColor = Color.ForestGreen;
-            }
-            else
-            {
-                RelayManager.Close(0, 7);
-                R7.BackColor = SystemColors.Control;
-            }
+            toggleRelay(7);
         }
         
         private void R8_Click(object sender, EventArgs e)
         {
-            if (R8.BackColor == SystemColors.Control)
-            {
-                RelayManager.Open(0, 8);
-                R8.BackColor = Color.ForestGreen;
-            }
-            else
-            {
-                RelayManager.Close(0, 8);
-                R8.BackColor = SystemColors.Control;
-            }
+            toggleRelay(8);
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -493,5 +448,284 @@ namespace SpeedAndDistance
             R7.Text = Properties.Settings.Default.R_7Name;
             R8.Text = Properties.Settings.Default.R_8Name;
         }
+
+        private void toggleRelay(int RelayNo)
+        {
+            switch (RelayNo)
+            {
+                case 1:
+                    if (R1.BackColor == SystemColors.Control)
+                    {
+                        //Enables that relay when button pressed.
+                        RelayManager.Open(0, 1);
+                        R1.BackColor = Color.ForestGreen;
+                    }
+                    else
+                    {
+                        //Disables that relay when button pressed.
+                        RelayManager.Close(0, 1);
+                        R1.BackColor = SystemColors.Control;
+                    }
+                    break;
+                case 2:
+                    if (R2.BackColor == SystemColors.Control)
+                    {
+                        //Enables that relay when button pressed.
+                        RelayManager.Open(0, 2);
+                        R2.BackColor = Color.ForestGreen;
+                    }
+                    else
+                    {
+                        //Disables that relay when button pressed.
+                        RelayManager.Close(0, 2);
+                        R2.BackColor = SystemColors.Control;
+                    }
+                    break;
+                case 3:
+                    if (R3.BackColor == SystemColors.Control)
+                    {
+                        //Enables that relay when button pressed.
+                        RelayManager.Open(0, 3);
+                        R3.BackColor = Color.ForestGreen;
+                    }
+                    else
+                    {
+                        //Disables that relay when button pressed.
+                        RelayManager.Close(0, 3);
+                        R3.BackColor = SystemColors.Control;
+                    }
+                    break;
+                case 4:
+                    if (R4.BackColor == SystemColors.Control)
+                    {
+                        //Enables that relay when button pressed.
+                        RelayManager.Open(0, 4);
+                        R4.BackColor = Color.ForestGreen;
+                    }
+                    else
+                    {
+                        //Disables that relay when button pressed.
+                        RelayManager.Close(0, 4);
+                        R4.BackColor = SystemColors.Control;
+                    }
+                    break;
+                case 5:
+                    if (R5.BackColor == SystemColors.Control)
+                    {
+                        //Enables that relay when button pressed.
+                        RelayManager.Open(0, 5);
+                        R5.BackColor = Color.ForestGreen;
+                    }
+                    else
+                    {
+                        //Disables that relay when button pressed.
+                        RelayManager.Close(0, 5);
+                        R5.BackColor = SystemColors.Control;
+                    }
+                    break;
+                case 6:
+                    if (R6.BackColor == SystemColors.Control)
+                    {
+                        //Enables that relay when button pressed.
+                        RelayManager.Open(0, 6);
+                        R6.BackColor = Color.ForestGreen;
+                    }
+                    else
+                    {
+                        //Disables that relay when button pressed.
+                        RelayManager.Close(0, 6);
+                        R6.BackColor = SystemColors.Control;
+                    }
+                    break;
+                case 7:
+                    if (R7.BackColor == SystemColors.Control)
+                    {
+                        //Enables that relay when button pressed.
+                        RelayManager.Open(0, 7);
+                        R7.BackColor = Color.ForestGreen;
+                    }
+                    else
+                    {
+                        //Disables that relay when button pressed.
+                        RelayManager.Close(0, 7);
+                        R7.BackColor = SystemColors.Control;
+                    }
+                    break;
+                case 8:
+                    if (R8.BackColor == SystemColors.Control)
+                    {
+                        //Enables that relay when button pressed.
+                        RelayManager.Open(0, 8);
+                        R8.BackColor = Color.ForestGreen;
+                    }
+                    else
+                    {
+                        //Disables that relay when button pressed.
+                        RelayManager.Close(0, 8);
+                        R8.BackColor = SystemColors.Control;
+                    }
+                    break;
+
+            }
+
+        }
+
+    }
+}
+
+
+/// <summary>
+/// Mit dieser Klasse kann man sehr leicht eine globale Hotkey funktionalität in seinem Programm einbinden.
+/// Man muss nur dieser Klasse nur eine Form zuweisen die gesubclassed werden soll.
+/// Dann muss man nur noch ein paar eigene HotKey-Kombinationen registrieren (z.B. Strg+Alt+X) und diese
+/// mit dem Event abfragen bzw. abfangen. Dazu muss man eine eigene HotKeyID angeben um einen bestimmte HotKey
+/// Kombination später zu identifizieren wenn diese gedrückt wird. Wenn man z.B. eine Kombination registriert
+/// und ihr z.B. die HotKeyID "TEST1" zugewiesen wird dann kann man später im Event nach dieser ID "TEST1" fragen
+/// und dann eine Funktion aufrufen die für diesen HotKey bestimmt wurde.
+/// </summary>
+/// <remarks>Copyright © 2006 Tim Hartwig</remarks>
+public class HotKey : IMessageFilter
+{
+    [DllImport("user32", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
+    private static extern int RegisterHotKey(IntPtr Hwnd, int ID, int Modifiers, int Key);
+
+    [DllImport("user32", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
+    private static extern int UnregisterHotKey(IntPtr Hwnd, int ID);
+
+    [DllImport("kernel32", EntryPoint = "GlobalAddAtomA", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
+    private static extern short GlobalAddAtom(string IDString);
+
+    [DllImport("kernel32", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
+    private static extern short GlobalDeleteAtom(short Atom);
+
+
+    public class HotKeyObject
+    {
+        private Keys mHotKey;
+        private MODKEY mModifier;
+        private string mHotKeyID;
+        private short mAtomID;
+
+        public Keys HotKey
+        {
+            get { return mHotKey; }
+            set { mHotKey = value; }
+        }
+
+        public MODKEY Modifier
+        {
+            get { return mModifier; }
+            set { mModifier = value; }
+        }
+
+        public string HotKeyID
+        {
+            get { return mHotKeyID; }
+            set { mHotKeyID = value; }
+        }
+
+        public short AtomID
+        {
+            get { return mAtomID; }
+            set { mAtomID = value; }
+        }
+
+        public HotKeyObject(Keys NewHotKey, MODKEY NewModifier, string NewHotKeyID)
+        {
+            mHotKey = NewHotKey;
+            mModifier = NewModifier;
+            mHotKeyID = NewHotKeyID;
+        }
+    }
+
+      public Form OwnerForm
+       {
+           get { return mForm; }
+           set { mForm = value; }
+       }
+      
+    private Form mForm;
+    private const int WM_HOTKEY = 786;
+    private System.Collections.Generic.Dictionary<short, HotKeyObject> mHotKeyList = new System.Collections.Generic.Dictionary<short, HotKeyObject>();
+    private System.Collections.Generic.Dictionary<string, short> mHotKeyIDList = new System.Collections.Generic.Dictionary<string, short>();
+
+    /// <summary>
+    /// Diesem Event wird immer die zugewiesene HotKeyID übergeben wenn eine HotKey Kombination gedrückt wurde.
+    /// </summary>
+    public event HotKeyPressedEventHandler HotKeyPressed;
+    public delegate void HotKeyPressedEventHandler(string HotKeyID);
+
+    public enum MODKEY : int
+    {
+        MOD_NONE = 0,
+        MOD_ALT = 1,
+        MOD_CONTROL = 2,
+        MOD_SHIFT = 4,
+        MOD_WIN = 8
+    }
+
+    public HotKey()
+    {
+        Application.AddMessageFilter(this);
+    }
+
+    /// <summary>
+    /// Diese Funktion fügt einen Hotkey hinzu und registriert ihn auch sofort
+    /// </summary>
+    /// <param name="KeyCode">Den KeyCode für die Taste</param>
+    /// <param name="Modifiers">Die Zusatztasten wie z.B. Strg oder Alt, diese können auch mit OR kombiniert werden</param>
+    /// <param name="HotKeyID">Die ID die der Hotkey bekommen soll um diesen zu identifizieren</param>
+    public void AddHotKey(Keys KeyCode, MODKEY Modifiers, string HotKeyID)
+    {
+        if (mHotKeyIDList.ContainsKey(HotKeyID) == true) return; // TODO: might not be correct. Was : Exit Sub
+
+        short ID = GlobalAddAtom(HotKeyID);
+        mHotKeyIDList.Add(HotKeyID, ID);
+        mHotKeyList.Add(ID, new HotKeyObject(KeyCode, Modifiers, HotKeyID));
+        RegisterHotKey(mForm.Handle, (int)ID, (int)mHotKeyList[ID].Modifier, (int)mHotKeyList[ID].HotKey);
+    }
+
+    /// <summary>
+    /// Diese Funktion entfernt einen Hotkey und deregistriert ihn auch sofort
+    /// </summary>
+    /// <param name="HotKeyID">Gibt die HotkeyID an welche entfernt werden soll</param>
+    public void RemoveHotKey(string HotKeyID)
+    {
+        if (mHotKeyIDList.ContainsKey(HotKeyID) == false) return; // TODO: might not be correct. Was : Exit Sub
+
+        short ID = mHotKeyIDList[HotKeyID];
+        mHotKeyIDList.Remove(HotKeyID);
+        mHotKeyList.Remove(ID);
+        UnregisterHotKey(mForm.Handle, (int)ID);
+        GlobalDeleteAtom(ID);
+    }
+
+    /// <summary>
+    /// Diese Routine entfernt und Deregistriert alle Hotkeys
+    /// </summary>
+    public void RemoveAllHotKeys()
+    {
+        List<string> IDList = new List<string>();
+        foreach (KeyValuePair<string, short> KVP in mHotKeyIDList)
+        {
+            IDList.Add(KVP.Key);
+        }
+
+        for (int i = 0; i <= IDList.Count - 1; i++)
+        {
+            RemoveHotKey(IDList[i]);
+        }
+    }
+
+    public bool PreFilterMessage(ref Message m)
+    {
+        if (m.Msg == WM_HOTKEY)
+        {
+            if (HotKeyPressed != null)
+            {
+                HotKeyPressed(mHotKeyList[(short)m.WParam].HotKeyID);
+            }
+        }
+        return false;
     }
 }

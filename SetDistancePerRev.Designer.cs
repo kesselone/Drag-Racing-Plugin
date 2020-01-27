@@ -345,7 +345,7 @@
             this.R8.BackColor = System.Drawing.SystemColors.Control;
             this.R8.ContextMenuStrip = this.contextMenuStrip1;
             this.R8.Location = new System.Drawing.Point(11, 203);
-            this.R8.Margin = new System.Windows.Forms.Padding(2);
+            this.R8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.R8.Name = "R8";
             this.R8.Size = new System.Drawing.Size(96, 34);
             this.R8.TabIndex = 31;
@@ -355,6 +355,7 @@
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(48, 48);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.renameToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -372,7 +373,7 @@
             this.R7.BackColor = System.Drawing.SystemColors.Control;
             this.R7.ContextMenuStrip = this.contextMenuStrip1;
             this.R7.Location = new System.Drawing.Point(111, 165);
-            this.R7.Margin = new System.Windows.Forms.Padding(2);
+            this.R7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.R7.Name = "R7";
             this.R7.Size = new System.Drawing.Size(96, 34);
             this.R7.TabIndex = 30;
@@ -385,7 +386,7 @@
             this.R6.BackColor = System.Drawing.SystemColors.Control;
             this.R6.ContextMenuStrip = this.contextMenuStrip1;
             this.R6.Location = new System.Drawing.Point(11, 165);
-            this.R6.Margin = new System.Windows.Forms.Padding(2);
+            this.R6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.R6.Name = "R6";
             this.R6.Size = new System.Drawing.Size(96, 34);
             this.R6.TabIndex = 29;
@@ -397,7 +398,7 @@
             // 
             this.R5.BackColor = System.Drawing.SystemColors.Control;
             this.R5.Location = new System.Drawing.Point(307, 297);
-            this.R5.Margin = new System.Windows.Forms.Padding(2);
+            this.R5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.R5.Name = "R5";
             this.R5.Size = new System.Drawing.Size(57, 23);
             this.R5.TabIndex = 28;
@@ -408,7 +409,7 @@
             // 
             this.R4.BackColor = System.Drawing.SystemColors.Control;
             this.R4.Location = new System.Drawing.Point(306, 270);
-            this.R4.Margin = new System.Windows.Forms.Padding(2);
+            this.R4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.R4.Name = "R4";
             this.R4.Size = new System.Drawing.Size(57, 23);
             this.R4.TabIndex = 27;
@@ -419,7 +420,7 @@
             // 
             this.R3.BackColor = System.Drawing.SystemColors.Control;
             this.R3.Location = new System.Drawing.Point(306, 243);
-            this.R3.Margin = new System.Windows.Forms.Padding(2);
+            this.R3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.R3.Name = "R3";
             this.R3.Size = new System.Drawing.Size(57, 23);
             this.R3.TabIndex = 26;
@@ -430,7 +431,7 @@
             // 
             this.R2.BackColor = System.Drawing.SystemColors.Control;
             this.R2.Location = new System.Drawing.Point(306, 216);
-            this.R2.Margin = new System.Windows.Forms.Padding(2);
+            this.R2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.R2.Name = "R2";
             this.R2.Size = new System.Drawing.Size(57, 23);
             this.R2.TabIndex = 25;
@@ -450,7 +451,7 @@
             // R1
             // 
             this.R1.Location = new System.Drawing.Point(306, 165);
-            this.R1.Margin = new System.Windows.Forms.Padding(2);
+            this.R1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.R1.Name = "R1";
             this.R1.Size = new System.Drawing.Size(57, 47);
             this.R1.TabIndex = 24;
@@ -537,6 +538,8 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SetDistancePerRev";
             this.Text = "Drag Racing";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SetDistancePerRev_FormClosing);

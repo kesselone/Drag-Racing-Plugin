@@ -12,7 +12,7 @@ using Settings;
 
 namespace SpeedAndDistance
 {
-
+    
     [Export(typeof(IDataIOProvider))]
     public class SpeedAndDistance: IDataIOProvider
     {
@@ -94,7 +94,9 @@ namespace SpeedAndDistance
             // this is necessary for YourDyno to associate each plugin channel with the right plugin
             foreach (OnePlugInDataConnection plugin in data)
                 plugin.pluginName = name;
-
+            
+            
+            
         }
 
         public System.Windows.Forms.ToolStripMenuItem pluginMenuEntry
@@ -176,7 +178,7 @@ namespace SpeedAndDistance
             }
             
             
-            switch (Properties.Settings.Default.race_state)
+            switch (Properties.Settings.Default.race_state) //not yet handled...
             {
                 case 0:
                 //come to stop
