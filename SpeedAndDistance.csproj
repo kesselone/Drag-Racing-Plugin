@@ -82,6 +82,12 @@
     <Compile Include="Settings.cs" />
     <Compile Include="SpeedAndDistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatusOverlay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatusOverlay.Designer.cs">
+      <DependentUpon>StatusOverlay.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
@@ -103,6 +109,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="StatusOverlay.resx">
+      <DependentUpon>StatusOverlay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="USB_RELAY_DEVICE.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

@@ -148,7 +148,7 @@ namespace SpeedAndDistance
                 else
                     distance.y += rollerRPM / 60 * Properties.Settings.Default.brakeCirc * (float)e.processedDynoSample.timeStamp * (float) 3.28084;
             }
-
+            
             /////////////Drag Racing:
             float distance_target = 0, speed_target = 0;
             

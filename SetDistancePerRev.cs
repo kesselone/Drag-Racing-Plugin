@@ -28,8 +28,12 @@ namespace SpeedAndDistance
         private int counter;
         Stopwatch stopwatch = new Stopwatch();
         HotKey HK = new HotKey();
-        
-        
+        StatusOverlay statusOverlay = new StatusOverlay
+        {
+            Size = new System.Drawing.Size(398, 38),
+            
+        };
+
 
         //Loads the driver from embeded resource
         static public class NativeMethods
@@ -109,13 +113,13 @@ namespace SpeedAndDistance
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
 
             ////////////////////////////////////
-            ///Start of app
+            ///Hotkeys
             ///
             ////////////////////////////////////
             //Hilfsform erschaffen um die Hotkeys zu behandeln. nicht sichtbar
-            Form HKHandlerForm = new Form() { Visible = false };            
-            HK.OwnerForm = HKHandlerForm;
+            Form HKHandlerForm = new Form() { Visible = false };
 
+            HK.OwnerForm = HKHandlerForm;
 
             HK.HotKeyPressed += new HotKey.HotKeyPressedEventHandler(HK_HotKeyPressed);
 
@@ -128,9 +132,23 @@ namespace SpeedAndDistance
             HK.AddHotKey(Keys.F7, HotKey.MODKEY.MOD_NONE, "Relay7Key");
             HK.AddHotKey(Keys.F8, HotKey.MODKEY.MOD_NONE, "Relay8Key");
 
+            //////////////////////////////
+            ///Relay Status
+            ///
+            Rectangle screensize=Screen.PrimaryScreen.WorkingArea;
+            int xpos = screensize.Width-400;
+            int ypos = 25;
+            statusOverlay.Location = new System.Drawing.Point(xpos, ypos);
 
             InitializeComponent();
+
+
             
+            
+
+            statusOverlay.Show();
+
+
             R6.Text = Properties.Settings.Default.R_6Name;
             R7.Text = Properties.Settings.Default.R_7Name;
             R8.Text = Properties.Settings.Default.R_8Name;
@@ -150,7 +168,7 @@ namespace SpeedAndDistance
             //Checks to see if there is a connected USB Relay board.
             if (RelayManager.DevicesCount() == 0)
             {
-                MessageBox.Show("USBRelay (No Connected Devices)");
+                //MessageBox.Show("USBRelay (No Connected Devices)");
 
             }
             else
@@ -264,6 +282,9 @@ namespace SpeedAndDistance
             if (radioButtonRaceMode3.Checked) Properties.Settings.Default.race_mode = 2;
             if (radioButtonRaceMode4.Checked) Properties.Settings.Default.race_mode = 3;
             if (radioButtonRaceMode5.Checked) Properties.Settings.Default.race_mode = 4;
+            statusOverlay.button1.Text = Properties.Settings.Default.R_6Name+" (F6)";
+            statusOverlay.button2.Text = Properties.Settings.Default.R_7Name+" (F7)";
+            statusOverlay.button3.Text = Properties.Settings.Default.R_8Name+" (F8)";
             Properties.Settings.Default.brakeCirc = (float)textBoxBrakeCirc.Value;
             Properties.Settings.Default.start_mode = radioButtonModeStd.Checked;
             int.TryParse(textBoxStageTime.Text, out int j);
@@ -451,6 +472,7 @@ namespace SpeedAndDistance
 
         private void toggleRelay(int RelayNo)
         {
+            //StatusOverlay statusOverlay = new StatusOverlay();
             switch (RelayNo)
             {
                 case 1:
@@ -459,6 +481,7 @@ namespace SpeedAndDistance
                         //Enables that relay when button pressed.
                         RelayManager.Open(0, 1);
                         R1.BackColor = Color.ForestGreen;
+                        
                     }
                     else
                     {
@@ -529,12 +552,14 @@ namespace SpeedAndDistance
                         //Enables that relay when button pressed.
                         RelayManager.Open(0, 6);
                         R6.BackColor = Color.ForestGreen;
+                        statusOverlay.button1.BackColor = Color.ForestGreen;
                     }
                     else
                     {
                         //Disables that relay when button pressed.
                         RelayManager.Close(0, 6);
                         R6.BackColor = SystemColors.Control;
+                        statusOverlay.button1.BackColor = SystemColors.Control;
                     }
                     break;
                 case 7:
@@ -543,12 +568,14 @@ namespace SpeedAndDistance
                         //Enables that relay when button pressed.
                         RelayManager.Open(0, 7);
                         R7.BackColor = Color.ForestGreen;
+                        statusOverlay.button2.BackColor = Color.ForestGreen;
                     }
                     else
                     {
                         //Disables that relay when button pressed.
                         RelayManager.Close(0, 7);
                         R7.BackColor = SystemColors.Control;
+                        statusOverlay.button2.BackColor = SystemColors.Control;
                     }
                     break;
                 case 8:
@@ -557,12 +584,14 @@ namespace SpeedAndDistance
                         //Enables that relay when button pressed.
                         RelayManager.Open(0, 8);
                         R8.BackColor = Color.ForestGreen;
+                        statusOverlay.button3.BackColor = Color.ForestGreen;
                     }
                     else
                     {
                         //Disables that relay when button pressed.
                         RelayManager.Close(0, 8);
                         R8.BackColor = SystemColors.Control;
+                        statusOverlay.button3.BackColor = SystemColors.Control;
                     }
                     break;
 
