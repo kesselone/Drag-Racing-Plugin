@@ -154,5 +154,41 @@ namespace SpeedAndDistance.Properties {
                 this["R_8Name"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool R6dis_on_speed {
+            get {
+                return ((bool)(this["R6dis_on_speed"]));
+            }
+            set {
+                this["R6dis_on_speed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool R7dis_on_speed {
+            get {
+                return ((bool)(this["R7dis_on_speed"]));
+            }
+            set {
+                this["R7dis_on_speed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool R8dis_on_speed {
+            get {
+                return ((bool)(this["R8dis_on_speed"]));
+            }
+            set {
+                this["R8dis_on_speed"] = value;
+            }
+        }
     }
 }

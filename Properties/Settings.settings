@@ -35,5 +35,14 @@
     <Setting Name="R_8Name" Type="System.String" Scope="User">
       <Value Profile="(Default)">Relay 8</Value>
     </Setting>
+    <Setting Name="R6dis_on_speed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="R7dis_on_speed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="R8dis_on_speed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

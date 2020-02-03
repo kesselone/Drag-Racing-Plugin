@@ -23,12 +23,18 @@ namespace SpeedAndDistance
 
         private void StatusOverlay_Load(object sender, EventArgs e)
         {
-            button1.Size = new Size(this.Size.Width / 3, 38);
-            button1.Location = new Point(0, 0);
-            button2.Size = new Size(this.Size.Width / 3, 38);
-            button2.Location = new Point(this.Size.Width / 3, 0);
-            button3.Size = new Size(this.Size.Width / 3, 38);
-            button3.Location = new Point(2 * this.Size.Width / 3, 0);
+
+
+            buttonSettings.Size = new Size(38, 38);
+            
+            button1.Size = new Size((this.Size.Width-38) / 3, 38);
+            button1.Location = new Point(38, 0);
+            button2.Size = new Size((this.Size.Width - 38)/3, 38);
+            button2.Location = new Point((this.Size.Width - 38)/3+38, 0);
+
+                button3.Size = new Size((this.Size.Width - 38) / 3, 38);
+                button3.Location = new Point(2 * (this.Size.Width - 38) / 3 + 38, 0);
+
 
             button1.Text = Properties.Settings.Default.R_6Name+" (F6)";
             button2.Text = Properties.Settings.Default.R_7Name+" (F7)";
@@ -38,6 +44,15 @@ namespace SpeedAndDistance
 
 
 
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            //this must change...
+            buttonSettings.Enabled = false;
+            SetDistancePerRev setDistancePerRev = new SetDistancePerRev();
+            setDistancePerRev.Show();
+            
         }
     }
 }

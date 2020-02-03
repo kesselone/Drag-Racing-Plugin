@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatusOverlay));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -40,7 +42,7 @@
             this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button1.BackColor = System.Drawing.SystemColors.Control;
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Location = new System.Drawing.Point(129, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 114);
@@ -79,18 +81,33 @@
             this.button3.Text = "Relay 3";
             this.button3.UseVisualStyleBackColor = false;
             // 
+            // buttonSettings
+            // 
+            this.buttonSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSettings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonSettings.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonSettings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonSettings.BackgroundImage")));
+            this.buttonSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonSettings.Location = new System.Drawing.Point(0, 0);
+            this.buttonSettings.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(114, 114);
+            this.buttonSettings.TabIndex = 2;
+            this.buttonSettings.UseVisualStyleBackColor = false;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
             // StatusOverlay
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(1194, 114);
             this.ControlBox = false;
+            this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Enabled = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Location = new System.Drawing.Point(1, 1);
             this.MaximizeBox = false;
@@ -109,5 +126,6 @@
         public System.Windows.Forms.Button button1;
         public System.Windows.Forms.Button button2;
         public System.Windows.Forms.Button button3;
+        public System.Windows.Forms.Button buttonSettings;
     }
 }

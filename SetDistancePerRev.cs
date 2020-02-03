@@ -95,22 +95,10 @@ namespace SpeedAndDistance
             }
         }
 
-
+        fom_rename fom_Rename = new fom_rename();
         public SetDistancePerRev()
         {
-            //defines the internal USB Relay driver resource
-            string resourceName = "SpeedAndDistance.USB_RELAY_DEVICE.dll";
-            string libraryName = "USB_RELAY_DEVICE.dll";
-
-            // create and load library from the resource
-            string tempDllPath = CommonUtils.LoadUnmanagedLibraryFromResource(Assembly.GetExecutingAssembly(),
-                resourceName,
-                libraryName);
-            dlldir = tempDllPath;
-            // invoke native library function
-
-            //Makes a new event for when "YourDyno" closes.
-            Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
+            
 
             ////////////////////////////////////
             ///Hotkeys
@@ -120,7 +108,6 @@ namespace SpeedAndDistance
             Form HKHandlerForm = new Form() { Visible = false };
 
             HK.OwnerForm = HKHandlerForm;
-
             HK.HotKeyPressed += new HotKey.HotKeyPressedEventHandler(HK_HotKeyPressed);
 
             HK.AddHotKey(Keys.F1, HotKey.MODKEY.MOD_CONTROL, "Relay1Key");
@@ -141,10 +128,6 @@ namespace SpeedAndDistance
             statusOverlay.Location = new System.Drawing.Point(xpos, ypos);
 
             InitializeComponent();
-
-
-            
-            
 
             statusOverlay.Show();
 
@@ -168,8 +151,8 @@ namespace SpeedAndDistance
             //Checks to see if there is a connected USB Relay board.
             if (RelayManager.DevicesCount() == 0)
             {
+                Properties.Status.Default.NoRelayBrd = true;
                 //MessageBox.Show("USBRelay (No Connected Devices)");
-
             }
             else
             {
@@ -277,6 +260,7 @@ namespace SpeedAndDistance
         }
         private void SaveEverything() //This Function is used to save all properties. Should be called when closing form or starting a pull etc.
         {
+            
             if (radioButtonRaceMode1.Checked) Properties.Settings.Default.race_mode = 0;
             if (radioButtonRaceMode2.Checked) Properties.Settings.Default.race_mode = 1;
             if (radioButtonRaceMode3.Checked) Properties.Settings.Default.race_mode = 2;
@@ -358,10 +342,7 @@ namespace SpeedAndDistance
             R4.BackColor = SystemColors.Control;
             RelayManager.Close(0, 5);
             R5.BackColor = SystemColors.Control;
-            RelayManager.Close(0, 6);
-            R6.BackColor = SystemColors.Control;
-            RelayManager.Close(0, 7);
-            R7.BackColor = SystemColors.Control;
+
             buttonCancelRace.Visible = false;
 
             timer2000.Interval = Properties.Settings.Default.preStageTime_ms;
@@ -462,7 +443,7 @@ namespace SpeedAndDistance
 
         private void renameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fom_rename fom_Rename = new fom_rename();
+            
             fom_Rename.ShowDialog(this);
 
             R6.Text = Properties.Settings.Default.R_6Name;
@@ -472,9 +453,17 @@ namespace SpeedAndDistance
 
         private void toggleRelay(int RelayNo)
         {
-            //StatusOverlay statusOverlay = new StatusOverlay();
+            //Set RelayNo to 0 if rollers are turning and deactivation checkbox is checked
+            //DEBUG:
+            //Properties.Status.Default.RollersTurning = true;
+            if (Properties.Status.Default.RollersTurning & Properties.Settings.Default.R6dis_on_speed & RelayNo == 6) RelayNo = 0;
+            if (Properties.Status.Default.RollersTurning & Properties.Settings.Default.R7dis_on_speed & RelayNo == 7) RelayNo = 0;
+            if (Properties.Status.Default.RollersTurning & Properties.Settings.Default.R8dis_on_speed & RelayNo == 8) RelayNo = 0;
+
             switch (RelayNo)
             {
+                case 0:
+                    break;
                 case 1:
                     if (R1.BackColor == SystemColors.Control)
                     {
@@ -547,58 +536,66 @@ namespace SpeedAndDistance
                     }
                     break;
                 case 6:
-                    if (R6.BackColor == SystemColors.Control)
-                    {
-                        //Enables that relay when button pressed.
-                        RelayManager.Open(0, 6);
-                        R6.BackColor = Color.ForestGreen;
-                        statusOverlay.button1.BackColor = Color.ForestGreen;
-                    }
-                    else
-                    {
-                        //Disables that relay when button pressed.
-                        RelayManager.Close(0, 6);
-                        R6.BackColor = SystemColors.Control;
-                        statusOverlay.button1.BackColor = SystemColors.Control;
-                    }
+                     if (R6.BackColor == SystemColors.Control)
+                        {
+                            //Enables that relay when button pressed.
+                            RelayManager.Open(0, 6);
+                            R6.BackColor = Color.ForestGreen;
+                            statusOverlay.button1.BackColor = Color.ForestGreen;
+                        }
+                        else
+                        {
+                            //Disables that relay when button pressed.
+                            RelayManager.Close(0, 6);
+                            R6.BackColor = SystemColors.Control;
+                            statusOverlay.button1.BackColor = SystemColors.Control;
+                        }
                     break;
                 case 7:
-                    if (R7.BackColor == SystemColors.Control)
-                    {
-                        //Enables that relay when button pressed.
-                        RelayManager.Open(0, 7);
-                        R7.BackColor = Color.ForestGreen;
-                        statusOverlay.button2.BackColor = Color.ForestGreen;
-                    }
-                    else
-                    {
-                        //Disables that relay when button pressed.
-                        RelayManager.Close(0, 7);
-                        R7.BackColor = SystemColors.Control;
-                        statusOverlay.button2.BackColor = SystemColors.Control;
-                    }
+                        if (R7.BackColor == SystemColors.Control)
+                        {
+                            //Enables that relay when button pressed.
+                            RelayManager.Open(0, 7);
+                            R7.BackColor = Color.ForestGreen;
+                            statusOverlay.button2.BackColor = Color.ForestGreen;
+                        }
+                        else
+                        {
+                            //Disables that relay when button pressed.
+                            RelayManager.Close(0, 7);
+                            R7.BackColor = SystemColors.Control;
+                            statusOverlay.button2.BackColor = SystemColors.Control;
+                        }
                     break;
                 case 8:
-                    if (R8.BackColor == SystemColors.Control)
-                    {
-                        //Enables that relay when button pressed.
-                        RelayManager.Open(0, 8);
-                        R8.BackColor = Color.ForestGreen;
-                        statusOverlay.button3.BackColor = Color.ForestGreen;
-                    }
-                    else
-                    {
-                        //Disables that relay when button pressed.
-                        RelayManager.Close(0, 8);
-                        R8.BackColor = SystemColors.Control;
-                        statusOverlay.button3.BackColor = SystemColors.Control;
-                    }
+                        if (R8.BackColor == SystemColors.Control)
+                        {
+                            //Enables that relay when button pressed.
+                            RelayManager.Open(0, 8);
+                            R8.BackColor = Color.ForestGreen;
+                            statusOverlay.button3.BackColor = Color.ForestGreen;
+                        }
+                        else
+                        {
+                            //Disables that relay when button pressed.
+                            RelayManager.Close(0, 8);
+                            R8.BackColor = SystemColors.Control;
+                            statusOverlay.button3.BackColor = SystemColors.Control;
+                        }
                     break;
 
             }
 
         }
 
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            fom_Rename.ShowDialog(this);
+
+            R6.Text = Properties.Settings.Default.R_6Name;
+            R7.Text = Properties.Settings.Default.R_7Name;
+            R8.Text = Properties.Settings.Default.R_8Name;
+        }
     }
 }
 

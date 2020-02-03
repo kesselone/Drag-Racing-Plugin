@@ -124,4 +124,7 @@
   <data name="04908" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\04908.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Windows_Settings_app_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Windows_Settings_app_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

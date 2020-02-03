@@ -25,6 +25,9 @@ namespace SpeedAndDistance
         public event ConfigChangeEventHandler OnConfigurationChange; // not needed for this module
         private SetDistancePerRev setDistancePerRev = new SetDistancePerRev();
 
+        private float distance_target = 0, speed_target = 0;
+
+
         public string name
         {
             get
@@ -95,7 +98,7 @@ namespace SpeedAndDistance
             foreach (OnePlugInDataConnection plugin in data)
                 plugin.pluginName = name;
             
-            
+        
             
         }
 
@@ -130,6 +133,13 @@ namespace SpeedAndDistance
             else
                 rollerRPM = (float)e.processedDynoSample.instantRoller1RPM;
 
+            ///change status to be able to block relays
+            if (rollerRPM > 0)
+                Properties.Status.Default.RollersTurning = true;
+            else
+                Properties.Status.Default.RollersTurning = false;
+
+
             if (Settings.Properties.Settings.Default.UnitSelection == "Metric")
             {
                 speed.y = rollerRPM * Properties.Settings.Default.brakeCirc * 60 / 1000;
@@ -150,7 +160,7 @@ namespace SpeedAndDistance
             }
             
             /////////////Drag Racing:
-            float distance_target = 0, speed_target = 0;
+            
             
             
             switch (Properties.Settings.Default.race_mode)
@@ -190,7 +200,7 @@ namespace SpeedAndDistance
                     }
                     break;
                 case 2:
-                    if (distance.y > distance_target || speed.y > speed_target)
+                    if (distance.y > distance_target | speed.y > speed_target)
                     {
                         Properties.Settings.Default.race_state = 4; //finished
                     }

@@ -72,6 +72,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Status.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Status.settings</DependentUpon>
+    </Compile>
     <Compile Include="RelayManager.cs" />
     <Compile Include="SetDistancePerRev.cs">
       <SubType>Form</SubType>
@@ -117,10 +122,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\Status.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Status.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Resources\e9d72b7fb88b68f92ccc721e0a3148b2.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\04908.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Windows_Settings_app_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
