@@ -46,5 +46,53 @@ namespace SpeedAndDistance.Properties {
                 this["NoRelayBrd"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte race_state {
+            get {
+                return ((byte)(this["race_state"]));
+            }
+            set {
+                this["race_state"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float speed_kph {
+            get {
+                return ((float)(this["speed_kph"]));
+            }
+            set {
+                this["speed_kph"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float distance_m {
+            get {
+                return ((float)(this["distance_m"]));
+            }
+            set {
+                this["distance_m"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool reset_distance {
+            get {
+                return ((bool)(this["reset_distance"]));
+            }
+            set {
+                this["reset_distance"] = value;
+            }
+        }
     }
 }

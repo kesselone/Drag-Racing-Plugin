@@ -23,9 +23,6 @@
     <Setting Name="race_mode" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="race_state" Type="System.Byte" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="R_6Name" Type="System.String" Scope="User">
       <Value Profile="(Default)">Relay 6</Value>
     </Setting>

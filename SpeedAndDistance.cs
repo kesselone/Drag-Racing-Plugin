@@ -19,20 +19,21 @@ namespace SpeedAndDistance
         private System.Windows.Forms.ToolStripMenuItem menuEntry = new ToolStripMenuItem();
         private OnePlugInDataConnection speed = new OnePlugInDataConnection();
         private OnePlugInDataConnection distance = new OnePlugInDataConnection();
-        
+        private OnePlugInDataConnection powerKW = new OnePlugInDataConnection();
+
         private List<OnePlugInDataConnection> data = new List<OnePlugInDataConnection>();
         private DynoDataConnection dynoDataConnection;
         public event ConfigChangeEventHandler OnConfigurationChange; // not needed for this module
         private SetDistancePerRev setDistancePerRev = new SetDistancePerRev();
 
         private float distance_target = 0, speed_target = 0;
-
+        
 
         public string name
         {
             get
             {
-                return "Drag Racing";
+                return "Relay Config";
             }
         }
 
@@ -48,7 +49,8 @@ namespace SpeedAndDistance
         {
             get
             {
-                return "1.1";
+                return "0.4";
+
             }
         }
 
@@ -67,9 +69,9 @@ namespace SpeedAndDistance
                 Properties.Settings.Default.upgradeRequired = false;
                 Properties.Settings.Default.Save();
             }
-
+            
             this.menuEntry.Name = "menuEntry";
-            this.menuEntry.Text = "Drag Racing";
+            this.menuEntry.Text = "Relay Config";
             this.menuEntry.Click += new System.EventHandler(this.menuItem_Click);
 
             speed.name = "Speed";
@@ -93,6 +95,16 @@ namespace SpeedAndDistance
             distance.showGaugeInRunWindow = true; 
             distance.applyNoiseFiltering = true;
             data.Add(distance);
+            
+            powerKW.name = "Power (kW)";
+            powerKW.unit = "kW";
+            powerKW.graphPane = 1;
+            powerKW.isY2Axis = false;
+            powerKW.showGaugeInRunWindow = true;
+            powerKW.applyNoiseFiltering = true;
+            powerKW.unitType += 2;
+
+            data.Add(powerKW);
 
             // this is necessary for YourDyno to associate each plugin channel with the right plugin
             foreach (OnePlugInDataConnection plugin in data)
@@ -127,6 +139,14 @@ namespace SpeedAndDistance
 
         public void DynoDataReceivedEventHandler(object sender, OnDataReceivedEventArgs e)
         {
+            powerKW.y = (float)e.processedDynoSample.wheelHP/ (float)1.35962;
+            if (Properties.Status.Default.reset_distance)
+            {
+                Properties.Status.Default.reset_distance = false;
+                distance.y = 0;
+                //MessageBox.Show("Reset"); //DEBUG
+            }
+            
             float rollerRPM;
             if (SensorAndBrakeConfig.NumberOfRPMSensors() == 2)
                 rollerRPM = (float)(e.processedDynoSample.instantRoller1RPM + e.processedDynoSample.instantRoller2RPM) / 2;
@@ -144,7 +164,7 @@ namespace SpeedAndDistance
             {
                 speed.y = rollerRPM * Properties.Settings.Default.brakeCirc * 60 / 1000;
 
-                if (!dynoDataConnection.isLogging)
+                if (false)//!dynoDataConnection.isLogging)
                     distance.y = 0;
                 else
                     distance.y += rollerRPM / 60 * Properties.Settings.Default.brakeCirc * (float)e.processedDynoSample.timeStamp;
@@ -153,16 +173,19 @@ namespace SpeedAndDistance
             {
                 speed.y = rollerRPM * Properties.Settings.Default.brakeCirc * 60 / 1000 * (float)0.621371;
 
-                if (!dynoDataConnection.isLogging)
+                if (false)//!dynoDataConnection.isLogging)
                     distance.y = 0;
                 else
                     distance.y += rollerRPM / 60 * Properties.Settings.Default.brakeCirc * (float)e.processedDynoSample.timeStamp * (float) 3.28084;
             }
-            
+
+            Properties.Status.Default.speed_kph = speed.y;
+            Properties.Status.Default.distance_m = distance.y;
+
             /////////////Drag Racing:
-            
-            
-            
+
+
+
             switch (Properties.Settings.Default.race_mode)
             {
                 case 0:
@@ -188,7 +211,7 @@ namespace SpeedAndDistance
             }
             
             
-            switch (Properties.Settings.Default.race_state) //not yet handled...
+            switch (Properties.Status.Default.race_state) //not yet handled...
             {
                 case 0:
                 //come to stop
@@ -196,13 +219,13 @@ namespace SpeedAndDistance
                 case 1:
                 if (rollerRPM > 0)
                     {
-                        Properties.Settings.Default.race_state = 3; //false start 
+                        Properties.Status.Default.race_state = 3; //false start 
                     }
                     break;
                 case 2:
                     if (distance.y > distance_target | speed.y > speed_target)
                     {
-                        Properties.Settings.Default.race_state = 4; //finished
+                        Properties.Status.Default.race_state = 4; //finished
                     }
                     break;
 

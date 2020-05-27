@@ -369,8 +369,8 @@
             // 
             this.R8.BackColor = System.Drawing.SystemColors.Control;
             this.R8.ContextMenuStrip = this.contextMenuStrip1;
-            this.R8.Location = new System.Drawing.Point(38, 688);
-            this.R8.Margin = new System.Windows.Forms.Padding(6);
+            this.R8.Location = new System.Drawing.Point(38, 689);
+            this.R8.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.R8.Name = "R8";
             this.R8.Size = new System.Drawing.Size(304, 97);
             this.R8.TabIndex = 31;
@@ -397,8 +397,8 @@
             // 
             this.R7.BackColor = System.Drawing.SystemColors.Control;
             this.R7.ContextMenuStrip = this.contextMenuStrip1;
-            this.R7.Location = new System.Drawing.Point(38, 579);
-            this.R7.Margin = new System.Windows.Forms.Padding(6);
+            this.R7.Location = new System.Drawing.Point(38, 578);
+            this.R7.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.R7.Name = "R7";
             this.R7.Size = new System.Drawing.Size(304, 97);
             this.R7.TabIndex = 30;
@@ -411,7 +411,7 @@
             this.R6.BackColor = System.Drawing.SystemColors.Control;
             this.R6.ContextMenuStrip = this.contextMenuStrip1;
             this.R6.Location = new System.Drawing.Point(35, 470);
-            this.R6.Margin = new System.Windows.Forms.Padding(6);
+            this.R6.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.R6.Name = "R6";
             this.R6.Size = new System.Drawing.Size(304, 97);
             this.R6.TabIndex = 29;
@@ -422,8 +422,8 @@
             // R5
             // 
             this.R5.BackColor = System.Drawing.SystemColors.Control;
-            this.R5.Location = new System.Drawing.Point(972, 845);
-            this.R5.Margin = new System.Windows.Forms.Padding(6);
+            this.R5.Location = new System.Drawing.Point(969, 845);
+            this.R5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.R5.Name = "R5";
             this.R5.Size = new System.Drawing.Size(181, 65);
             this.R5.TabIndex = 28;
@@ -434,7 +434,7 @@
             // 
             this.R4.BackColor = System.Drawing.SystemColors.Control;
             this.R4.Location = new System.Drawing.Point(969, 768);
-            this.R4.Margin = new System.Windows.Forms.Padding(6);
+            this.R4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.R4.Name = "R4";
             this.R4.Size = new System.Drawing.Size(181, 65);
             this.R4.TabIndex = 27;
@@ -445,7 +445,7 @@
             // 
             this.R3.BackColor = System.Drawing.SystemColors.Control;
             this.R3.Location = new System.Drawing.Point(969, 692);
-            this.R3.Margin = new System.Windows.Forms.Padding(6);
+            this.R3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.R3.Name = "R3";
             this.R3.Size = new System.Drawing.Size(181, 65);
             this.R3.TabIndex = 26;
@@ -456,7 +456,7 @@
             // 
             this.R2.BackColor = System.Drawing.SystemColors.Control;
             this.R2.Location = new System.Drawing.Point(969, 615);
-            this.R2.Margin = new System.Windows.Forms.Padding(6);
+            this.R2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.R2.Name = "R2";
             this.R2.Size = new System.Drawing.Size(181, 65);
             this.R2.TabIndex = 25;
@@ -466,7 +466,7 @@
             // RSerial
             // 
             this.RSerial.AutoSize = true;
-            this.RSerial.Location = new System.Drawing.Point(26, 1093);
+            this.RSerial.Location = new System.Drawing.Point(25, 1093);
             this.RSerial.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.RSerial.Name = "RSerial";
             this.RSerial.Size = new System.Drawing.Size(278, 37);
@@ -476,7 +476,7 @@
             // R1
             // 
             this.R1.Location = new System.Drawing.Point(969, 470);
-            this.R1.Margin = new System.Windows.Forms.Padding(6);
+            this.R1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.R1.Name = "R1";
             this.R1.Size = new System.Drawing.Size(181, 134);
             this.R1.TabIndex = 24;
@@ -495,7 +495,7 @@
             // 
             // buttonCancelRace
             // 
-            this.buttonCancelRace.Location = new System.Drawing.Point(36, 1019);
+            this.buttonCancelRace.Location = new System.Drawing.Point(35, 1019);
             this.buttonCancelRace.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.buttonCancelRace.Name = "buttonCancelRace";
             this.buttonCancelRace.Size = new System.Drawing.Size(238, 65);
@@ -515,7 +515,7 @@
             // 
             this.labelRacetime.AutoSize = true;
             this.labelRacetime.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRacetime.Location = new System.Drawing.Point(106, 834);
+            this.labelRacetime.Location = new System.Drawing.Point(105, 834);
             this.labelRacetime.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.labelRacetime.Name = "labelRacetime";
             this.labelRacetime.Size = new System.Drawing.Size(429, 163);
@@ -529,10 +529,10 @@
             this.buttonSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.buttonSettings.Image = global::SpeedAndDistance.Properties.Resources.Windows_Settings_app_icon;
             this.buttonSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSettings.Location = new System.Drawing.Point(355, 579);
+            this.buttonSettings.Location = new System.Drawing.Point(355, 578);
             this.buttonSettings.Margin = new System.Windows.Forms.Padding(0);
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Size = new System.Drawing.Size(295, 101);
+            this.buttonSettings.Size = new System.Drawing.Size(295, 100);
             this.buttonSettings.TabIndex = 37;
             this.buttonSettings.Text = "Relay Setup";
             this.buttonSettings.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -567,7 +567,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1188, 1146);
+            this.ClientSize = new System.Drawing.Size(1188, 1267);
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.labelRacetime);
             this.Controls.Add(this.buttonCancelRace);
@@ -589,7 +589,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SetDistancePerRev";
-            this.Text = "Drag Racing";
+            this.Text = "Relay Config";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SetDistancePerRev_FormClosing);
             this.Load += new System.EventHandler(this.SetDistancePerRev_Load);
             ((System.ComponentModel.ISupportInitialize)(this.textBoxBrakeCirc)).EndInit();

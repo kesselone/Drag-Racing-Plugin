@@ -110,22 +110,26 @@ namespace SpeedAndDistance
             HK.OwnerForm = HKHandlerForm;
             HK.HotKeyPressed += new HotKey.HotKeyPressedEventHandler(HK_HotKeyPressed);
 
-            HK.AddHotKey(Keys.F1, HotKey.MODKEY.MOD_CONTROL, "Relay1Key");
+            /*HK.AddHotKey(Keys.F1, HotKey.MODKEY.MOD_CONTROL, "Relay1Key");
             HK.AddHotKey(Keys.F2, HotKey.MODKEY.MOD_CONTROL, "Relay2Key");
             HK.AddHotKey(Keys.F3, HotKey.MODKEY.MOD_CONTROL, "Relay3Key");
             HK.AddHotKey(Keys.F4, HotKey.MODKEY.MOD_CONTROL, "Relay4Key");
-            HK.AddHotKey(Keys.F5, HotKey.MODKEY.MOD_CONTROL, "Relay5Key");
+            HK.AddHotKey(Keys.F5, HotKey.MODKEY.MOD_CONTROL, "Relay5Key");*/
             HK.AddHotKey(Keys.F6, HotKey.MODKEY.MOD_NONE, "Relay6Key");
             HK.AddHotKey(Keys.F7, HotKey.MODKEY.MOD_NONE, "Relay7Key");
             HK.AddHotKey(Keys.F8, HotKey.MODKEY.MOD_NONE, "Relay8Key");
+            HK.AddHotKey(Keys.F9, HotKey.MODKEY.MOD_NONE, "ResetDistance");
 
             //////////////////////////////
             ///Relay Status
             ///
             Rectangle screensize=Screen.PrimaryScreen.WorkingArea;
-            int xpos = screensize.Width-400;
+            int width = 600;
+            int xpos = screensize.Width-width;
+            
             int ypos = 25;
             statusOverlay.Location = new System.Drawing.Point(xpos, ypos);
+            statusOverlay.Size = new Size(width, 38);
 
             InitializeComponent();
 
@@ -245,6 +249,7 @@ namespace SpeedAndDistance
             if (ID == "Relay6Key") toggleRelay(6);
             if (ID == "Relay7Key") toggleRelay(7);
             if (ID == "Relay8Key") toggleRelay(8);
+            if (ID == "ResetDistance") Properties.Status.Default.reset_distance = true;
             //DEBUG
             //MessageBox.Show(ID);
         }
@@ -323,7 +328,7 @@ namespace SpeedAndDistance
         private void startButton_Click(object sender, EventArgs e)
         {
             SaveEverything();
-            Properties.Settings.Default.race_state = 0;
+            Properties.Status.Default.race_state = 0;
             //Race State:
             //0 - before start
             //1 - starting
@@ -362,7 +367,7 @@ namespace SpeedAndDistance
                     R2.BackColor = Color.Orange;
                     timer2000.Stop();
                     timer500.Start();
-            Properties.Settings.Default.race_state = 1;
+            Properties.Status.Default.race_state = 1;
         }
 
         private void timer500_Tick(object sender, EventArgs e)
@@ -400,7 +405,7 @@ namespace SpeedAndDistance
                     timer500.Stop();
                     buttonCancelRace.Visible = true;
                     stopwatch.Restart();
-                    Properties.Settings.Default.race_state = 2;
+                    Properties.Status.Default.race_state = 2;
                     break;
             }
         }
@@ -411,8 +416,21 @@ namespace SpeedAndDistance
             string elapsedTime = String.Format("{0:00}.{1:000}",
             ts.Seconds, ts.Milliseconds);
             labelRacetime.Text = elapsedTime;
-            
-            //brakeforce = (1 / 2) * roh_Air / 10000 * CdA * (RollerCirc / 60000 * dynoRollerRPM) ^ 2; //F_brake = 1/2*roh_air*CdA*v^2
+
+            if (Properties.Status.Default.race_state == 4)
+            {
+                stopwatch.Stop();
+                MessageBox.Show("Finished!");
+                
+            }
+            if (Properties.Status.Default.race_state == 3)
+            {
+                
+                MessageBox.Show("False Start!");
+
+            }
+
+
         }
 
         private void labelRacetime_Click(object sender, EventArgs e)
@@ -451,7 +469,7 @@ namespace SpeedAndDistance
             R8.Text = Properties.Settings.Default.R_8Name;
         }
 
-        private void toggleRelay(int RelayNo)
+        public void toggleRelay(int RelayNo)
         {
             //Set RelayNo to 0 if rollers are turning and deactivation checkbox is checked
             //DEBUG:
@@ -597,6 +615,7 @@ namespace SpeedAndDistance
             R8.Text = Properties.Settings.Default.R_8Name;
         }
     }
+
 }
 
 

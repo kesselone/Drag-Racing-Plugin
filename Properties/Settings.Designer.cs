@@ -109,18 +109,6 @@ namespace SpeedAndDistance.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public byte race_state {
-            get {
-                return ((byte)(this["race_state"]));
-            }
-            set {
-                this["race_state"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Relay 6")]
         public string R_6Name {
             get {
